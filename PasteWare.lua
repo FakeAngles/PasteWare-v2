@@ -605,21 +605,8 @@ MenuGroup:AddToggle("ShowKeybinds", {
     end,
 })
 
-MenuGroup:AddToggle("SimulateMobileUI", {
-    Text = "Simulate Mobile Mode",
-    Tooltip = "Enable the mobile UI while on PC to test touch controls.",
-    Default = Library.MobileSimulation,
-    Callback = function(value)
-        Library:SetMobileSimulation(value)
-    end,
-})
-
 if Library.KeybindFrame and Toggles.ShowKeybinds then
     Library:SetKeybindListVisible(Toggles.ShowKeybinds.Value)
-end
-
-if Options.SimulateMobileUI then
-    Library:SetMobileSimulation(Options.SimulateMobileUI.Value)
 end
 
 Library.ToggleKeybind = Options.MenuKeybind
@@ -2679,3 +2666,4 @@ while true do
 end
 
 ThemeManager:LoadDefaultTheme()
+
