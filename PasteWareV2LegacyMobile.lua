@@ -1424,21 +1424,24 @@ local lighting = Services.Lighting
 ScriptState.lockedTime, ScriptState.fovValue, ScriptState.nebulaEnabled = 12, 70, false
 local originalAmbient, originalOutdoorAmbient = lighting.Ambient, lighting.OutdoorAmbient
 local originalFogStart, originalFogEnd, originalFogColor = lighting.FogStart, lighting.FogEnd, lighting.FogColor
-
 local nebulaThemeColor = Color3.fromRGB(173, 216, 230)
 
 worldbox:AddSlider("world_time", {
     Text = "Clock Time", Default = 12, Min = 0, Max = 24, Rounding = 1,
     Callback = function(v)
         ScriptState.lockedTime = v
-        lighting.ClockTime = v
-    end,
+        if ScriptState.lockTimeEnabled then
+            lighting.ClockTime = v
+        end
+    end
 })
 
 local oldNewIndex
 oldNewIndex = hookmetamethod(game, "__newindex", function(self, property, value)
-    if not checkcaller() and self == lighting then
-        if property == "ClockTime" then value = ScriptState.lockedTime end
+    if not checkcaller() and self == lighting and property == "ClockTime" then
+        if ScriptState.lockTimeEnabled then
+            value = ScriptState.lockedTime
+        end
     end
     return oldNewIndex(self, property, value)
 end)
@@ -1448,8 +1451,19 @@ worldbox:AddSlider("fov_slider", {
     Callback = function(v) ScriptState.fovValue = v end,
 })
 
+worldbox:AddToggle("lock_time_toggle", {
+    Text = "Lock Time",
+    Default = false,
+    Callback = function(v)
+        ScriptState.lockTimeEnabled = v
+        if v then
+            lighting.ClockTime = ScriptState.lockedTime
+        end
+    end
+})
+
 worldbox:AddToggle("fov_toggle", {
-    Text = "Enable FOV Change", Default = false,
+    Text = "FOV Change", Default = false,
     Callback = function(state) ScriptState.fovEnabled = state end,
 })
 
@@ -2706,4 +2720,5 @@ while true do
 end
 
 ThemeManager:LoadDefaultTheme()
+
 
