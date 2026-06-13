@@ -30,14 +30,14 @@ end
 --// Custom Drawing Library
 
 if not Drawing or not Drawing.new or not Drawing.Fonts then
-	loadstring(game.HttpGet(game, "https://pastebin.com/raw/huyiRsK0"))()
+	loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/FakeAngles/PasteWare-v2/refs/heads/main/drawing.lua"))()
 
 	repeat
 		wait(0)
 	until Drawing and Drawing.new and type(Drawing.new) == "function" and Drawing.Fonts and type(Drawing.Fonts) == "table"
 end
 
-local ConfigLibrary = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()
+local ConfigLibrary = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/FakeAngles/PasteWare-v2/refs/heads/main/EspMain.lua"))()
 
 local Vector2new, Vector3zero, CFramenew = Vector2.new, Vector3.zero, CFrame.new
 local Drawingnew, DrawingFonts = Drawing.new, Drawing.Fonts
@@ -67,7 +67,7 @@ end, function(self, Index, Value)
 end
 
 if identifyexecutor() == "Solara" then -- Quads are broken on Solara.
-	local DrawQuad = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/Exunys/Custom-Quad-Render-Object/main/Main.lua"))() -- Custom Quad Drawing Object
+	local DrawQuad = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/FakeAngles/PasteWare-v2/refs/heads/main/ESPMainQuad.lua"))() -- Custom Quad Drawing Object
 	local _Drawingnew = clonefunction(Drawing.new)
 
 	Drawingnew = function(...)
@@ -157,7 +157,7 @@ if not Degrade then
 	setrenderproperty = getupvalue(getmetatable(TemporaryDrawing).__newindex, 4)
 	TemporaryDrawing.Remove(TemporaryDrawing)
 else
-	local DrawQuad = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/Exunys/Custom-Quad-Render-Object/main/Main.lua"))() -- Custom Quad Drawing Object
+	local DrawQuad = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/FakeAngles/PasteWare-v2/refs/heads/main/ESPMainQuad.lua"))() -- Custom Quad Drawing Object
 	local _Drawingnew = clonefunction(Drawing.new)
 
 	local TemporaryDrawing = Drawingnew("Line")
